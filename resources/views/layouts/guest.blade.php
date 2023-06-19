@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class=" sm:pt-0 bg-gray-100 dark:bg-gray-900">
-                {{ $slot }}
+            {{ $slot }}
         </div>
     </body>
 </html>

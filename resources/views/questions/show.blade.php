@@ -14,9 +14,9 @@
                     <div class="flex mb-4">
                         <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
                         <div class="ml-2 mt-0.5">
-                            <span class="block font-medium  text-xl leading-snug text-black dark:text-gray-100"><a href="{{ route("questions.show", $question->id) }}">{{ $question->title }}</a></span>
-                            <span class="block text-md py-1 text-gray-500 dark:text-gray-400 font-bold leading-snug"><a href="{{ $question->user->url }}">{{ $question->user->name }}</a></span>
-                            <span class="block text-sm text-gray-500 dark:text-gray-500 font-light leading-snug">{{ $question->created_at->diffForHumans() }}</span>
+                            <span class="block font-medium text-base leading-snug text-black dark:text-gray-100"><a href="{{ route("packages.show", $question->id) }}">{{ $question->title }}</a></span>
+                            <span class="block text-xl text-gray-500 dark:text-gray-400 font-bold leading-snug"><a href="{{ $question->user->url }}">{{ $question->user->name }}</a></span>
+                            <span class="block text-sm text-gray-500 dark:text-gray-500 font-light leading-snug">{{ $question->created_at }}</span>
                         </div>
                     </div>
                     <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

@@ -19,7 +19,7 @@ class Question extends Model
 
 
     public function user() {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     // public function setTitleAttribute($value)
@@ -38,5 +38,20 @@ class Question extends Model
             ]
         );
     }
+
+    // protected function url(): Attribute 
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => $value
+    //     );
+    // }
+
+
+    // protected function createdDate(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (string $value) => $this->created_at->diffForHumans($value)
+    //     );
+    // }
 
 }
