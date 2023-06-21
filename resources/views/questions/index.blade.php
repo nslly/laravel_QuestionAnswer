@@ -23,6 +23,10 @@
         </div>
 
         <hr>
+
+        <div class="w-full">
+            @include('layouts._messagesSuccess')
+        </div>
     
         <div class="flex justify-around mt-12">
             @foreach ($questions as $question)

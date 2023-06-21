@@ -28,7 +28,7 @@
                     @csrf
                     <div class="w-full p-2 bg-gray-700">
                         <label for="question_title" class="block mb-2">Title</label>
-                        <input type="text" class="bg-gray-800 w-full leading-tight shadow-sm focus:border-white focus:ring-blue appearance-none focus:outline-none focus:shadow-outline" placeholder="Enter the title" name="title" id="question_title">
+                        <input type="text" value="{{ old('title') }}" class="bg-gray-800 w-full leading-tight shadow-sm focus:border-white focus:ring-blue appearance-none focus:outline-none focus:shadow-outline" placeholder="Enter the title" name="title" id="question_title">
 
                         @if ($errors->has('title'))
                             <p class="text-red-500 mt-2 text-sm">{{ $errors->first('title') }}</p>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="w-full p-2 bg-gray-700">
                         <label for="question_body" class="block mb-2">Explanations</label>
-                        <textarea class="bg-gray-800 w-full leading-tight shadow-sm focus:border-white focus:ring-blue appearance-none focus:outline-none focus:shadow-outline" rows="10" placeholder="Enter your full code here" name="body" id="question_body"> </textarea>
+                        <textarea class="bg-gray-800 w-full leading-tight shadow-sm focus:border-white focus:ring-blue appearance-none focus:outline-none focus:shadow-outline" rows="10" placeholder="Enter your full code here" name="body" id="question_body">{{ old('body') }} </textarea>
                         @if ($errors->has('body'))
                         <p class="text-red-500 mt-2 text-sm">{{ $errors->first('body') }}</p>
                     @endif
