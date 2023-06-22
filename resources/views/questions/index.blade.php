@@ -32,15 +32,22 @@
             @foreach ($questions as $question)
                 <div class="p-5 bg-gray-700 flex">
                     <div class="px-5 py-4 bg-white dark:bg-gray-800 flex flex-col justify-between shadow-md rounded-lg max-w-lg">
-                        <div class="flex mb-4 justify-start">
-                            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+                        <div class="flex mb-4 justify-between">
                             <div class="ml-2 mt-0.5">
                                 <span class="block font-medium  text-xl leading-snug text-black dark:text-gray-100"><a href="{{ route("questions.show", $question->id) }}">{{ $question->title }}</a></span>
-                                <span class="block text-md py-1 text-gray-500 dark:text-gray-400 font-bold leading-snug"><a href="{{ $question->user->url }}">{{ $question->user->name }}</a></span>
+                                <span class="block text-md py-1 text-gray-500 dark:text-gray-400 font-bold leading-snug">Created By <a class="text-slate-100 text-lg cursor-point font-bolder" href="{{ $question->user->url }}">{{ $question->user->name }}</a></span>
                                 <span class="block text-sm text-gray-500 dark:text-gray-500 font-light leading-snug">{{ $question->created_at->diffForHumans() }}</span>
                             </div>
+                            <div class="flex flex-col ml-2">
+                                <form class="flex justify-end" action="{{ route('questions.destroy', $question->id) }}" method="POST" enctype="multipart/form-data">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="text-blue font-bold text-red-300 border-2 py-2 px-3 border-red-300">X</button>
+                                </form>
+                                <a class="mt-3" href="{{ route('questions.edit', $question->id) }}"><span class="text-blue text-cyan-300 border-2 py-2 px-4 border-cyan-300">Edit</span></a>
+                            </div>
                         </div>
-                        <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">{{ $question->body }}</p>
                         <div class="flex justify-between mt-5">
                             <div class="flex">
                                 @if($question->answers > 0)

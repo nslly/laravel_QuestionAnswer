@@ -17,15 +17,16 @@
     <div class="bg-gray-700 m-16">
         <div class="mx-auto p-4">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                ADD QUESTION
+                EDIT QUESTION
             </h2>
         </div>
 
         <hr>
         <div class="mt-12">
             <div class="p-5 text-white bg-gray-700">
-                <form action="{{ route('questions.store') }}" method="POST" enctype="multipart/form-data">
-                    @include('questions._form', ['buttonText' => 'Ask Question'])
+                <form action="{{ route('questions.update', $question->id) }}" method="POST" enctype="multipart/form-data">
+                    @method('PUT')
+                    @include('questions._form', ['buttonText' => 'Edit Question'])
                 </form>
             </div>
         </div>

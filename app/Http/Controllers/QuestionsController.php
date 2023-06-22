@@ -68,7 +68,11 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        return view("questions.show");
+
+        
+        return view("questions.show", [
+            'question' => $question
+        ]);
     }
 
     /**
@@ -79,7 +83,9 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view('questions.edit', [
+            'question' => $question
+        ]);
     }
 
     /**
@@ -89,9 +95,13 @@ class QuestionsController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(AskQuestionRequest $request, Question $question)
     {
-        //
+
+        $validated = $request->validated();
+        $question->update($validated);
+
+        return redirect(route('questions.index'))->with('success', 'Your question are now updated');
     }
 
     /**
@@ -102,6 +112,8 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return redirect()->back();
     }
 }
