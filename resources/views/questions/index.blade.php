@@ -34,7 +34,7 @@
                     <div class="px-5 py-4 bg-white dark:bg-gray-800 flex flex-col justify-between shadow-md rounded-lg max-w-lg">
                         <div class="flex mb-4 justify-between">
                             <div class="ml-2 mt-0.5">
-                                <span class="block font-medium  text-xl leading-snug text-black dark:text-gray-100"><a href="{{ route("questions.show", $question->id) }}">{{ $question->title }}</a></span>
+                                <span class="block font-medium  text-xl leading-snug text-black dark:text-gray-100"><a href="{{ route("questions.show", $question->slug) }}">{{ $question->title }}</a></span>
                                 <span class="block text-md py-1 text-gray-500 dark:text-gray-400 font-bold leading-snug">Created By <a class="text-slate-100 text-lg cursor-point font-bolder" href="{{ $question->user->url }}">{{ $question->user->name }}</a></span>
                                 <span class="block text-sm text-gray-500 dark:text-gray-500 font-light leading-snug">{{ $question->created_at->diffForHumans() }}</span>
                             </div>

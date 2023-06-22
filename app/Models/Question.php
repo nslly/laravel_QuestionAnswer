@@ -39,6 +39,11 @@ class Question extends Model
         );
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     // protected function url(): Attribute 
     // {
     //     return Attribute::make(
