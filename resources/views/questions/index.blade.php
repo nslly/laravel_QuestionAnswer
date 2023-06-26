@@ -39,12 +39,17 @@
                                 <span class="block text-sm text-gray-500 dark:text-gray-500 font-light leading-snug">{{ $question->created_at->diffForHumans() }}</span>
                             </div>
                             <div class="flex flex-col ml-2">
-                                <form class="flex justify-end" action="{{ route('questions.destroy', $question->id) }}" method="POST" enctype="multipart/form-data">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" class="text-blue font-bold text-red-300 border-2 py-2 px-3 border-red-300">X</button>
-                                </form>
-                                <a class="mt-3" href="{{ route('questions.edit', $question->id) }}"><span class="text-blue text-cyan-300 border-2 py-2 px-4 border-cyan-300">Edit</span></a>
+                            
+                                @can('delete-question', $question)
+                                    <form class="flex justify-end" action="{{ route('questions.destroy', $question->slug) }}" method="POST" enctype="multipart/form-data">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="text-blue font-bold text-red-300 border-2 py-2 px-3 border-red-300">X</button>
+                                    </form>
+                                @endcan
+                                @can('update-question', $question)
+                                    <a class="mt-3" href="{{ route('questions.edit', $question->slug) }}"><span class="text-blue text-cyan-300 border-2 py-2 px-4 border-cyan-300">Edit</span></a>
+                                @endcan
                             </div>
                         </div>
                         <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">{{ $question->body }}</p>

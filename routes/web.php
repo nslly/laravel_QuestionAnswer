@@ -18,8 +18,9 @@ use App\Http\Controllers\QuestionsController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/questions', QuestionsController::class)->middleware('auth', ['except' => (['show','index'])]); 
 // Route::get('/questions/{question:slug}', [QuestionsController::class, 'show'])->name('questions.show');
-Route::resource('/questions', QuestionsController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

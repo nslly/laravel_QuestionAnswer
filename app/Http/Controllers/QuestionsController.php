@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\AskQuestionRequest;
 
 class QuestionsController extends Controller
@@ -36,9 +38,7 @@ class QuestionsController extends Controller
         $questions = Question::all();
 
 
-        return view('questions.create', [
-            "questions" => $questions
-        ]);
+        return view('questions.create');
 
     }
 
@@ -50,6 +50,7 @@ class QuestionsController extends Controller
      */
     public function store(AskQuestionRequest $request)
     {
+
         $validated = $request->validated();
         
 
@@ -84,9 +85,15 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        return view('questions.edit', [
-            'question' => $question
-        ]);
+
+        if (Gate::allows('update-question', $question)) {
+            return view('questions.edit', [
+                'question' => $question
+            ]);
+        } else {
+            abort(403);
+        }
+        // Gate::allows('update-question', $question) ? Response::allow() : Response::denyWithStatus(404);
     }
 
     /**
@@ -98,7 +105,6 @@ class QuestionsController extends Controller
      */
     public function update(AskQuestionRequest $request, Question $question)
     {
-
         $validated = $request->validated();
         $question->update($validated);
 
@@ -113,8 +119,13 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        $question->delete();
 
-        return redirect()->back();
+        if (Gate::allows('delete-question',$question)) {
+            $question->delete();
+            return redirect(route('questions.index'));
+        } else {
+            abort(403);
+        }
+        
     }
 }

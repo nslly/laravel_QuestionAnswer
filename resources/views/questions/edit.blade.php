@@ -24,7 +24,7 @@
         <hr>
         <div class="mt-12">
             <div class="p-5 text-white bg-gray-700">
-                <form action="{{ route('questions.update', $question->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('questions.update', $question->slug) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @include('questions._form', ['buttonText' => 'Edit Question'])
                 </form>
