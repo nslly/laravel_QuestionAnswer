@@ -21,7 +21,7 @@ class QuestionFactory extends Factory
             'title'     => rtrim(fake()->sentence(rand(5, 10)), '.'),
             'body'      => fake()->paragraphs(rand(3, 7), true), 
             'views'     => $this->faker->randomNumber(5),
-            'answers'   => $this->faker->randomNumber(5),
+            // 'answers'   => $this->faker->randomNumber(5),
             'user_id'   => User::factory(),
             'votes'     => rand(-3, 10), 
         ];

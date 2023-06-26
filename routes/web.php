@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/questions', QuestionsController::class)->middleware('auth', ['except' => (['show','index'])]); 
+Route::resource('/questions', QuestionsController::class); 
 // Route::get('/questions/{question:slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
 Route::get('/dashboard', function () {

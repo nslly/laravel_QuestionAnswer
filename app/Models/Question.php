@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Answer;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -43,6 +44,13 @@ class Question extends Model
     {
         return 'slug';
     }
+
+    public function answers_for_questions() 
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+
 
     // protected function url(): Attribute 
     // {

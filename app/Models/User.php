@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Answer;
 use App\Models\Question;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -45,6 +46,11 @@ class User extends Authenticatable
 
     public function questions() {
         return $this->hasMany(Question::class);
+    }
+
+    public function answers_for_questions() 
+    {
+        return $this->hasMany(Answer::class);
     }
 
 }

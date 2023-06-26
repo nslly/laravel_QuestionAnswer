@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
+use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         
         Question::factory()->count(rand(1,5))->create();
+        Answer::factory()->count(rand(1,5))->create();
 
     }
 }
