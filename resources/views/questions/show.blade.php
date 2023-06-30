@@ -23,8 +23,25 @@
 
         <hr>
         <div class="mt-12">
-            <div class="p-5 text-white bg-gray-700">
-                {{ $question->body}}
+            <div class="flex px-4">
+                <div class="flex flex-col px-2 justify-evenly items-center">
+                    {{-- <i class="fa fa-2x fa-solid fa-check"></i> --}}
+                    <a title="This helps to my question" href="#">
+                        <i class="fa fa-3x fa-caret-up"></i>
+                    </a>
+                    <span class="text-white">
+                        140
+                    </span>
+                    <a title="This not helps to my question" href="#">
+                        <i class="fa fa-3x fa-caret-down"></i>
+                    </a>
+                    <a title="Click to mark as a favorite question" href="#">
+                        <i class="fa fa-2x fa-solid fa-star text-yellow-500"></i>
+                    </a>
+                </div>
+                <div class="p-5 text-white bg-gray-700">
+                    {{ $question->body}}
+                </div>
             </div>
             <div class="flex flex-col ml-6 py-6">
                 <div>
@@ -42,7 +59,18 @@
         </div>
     </div>
 
-    <div class="bg-gray-700 m-16 mt-20">
+
+
+    @include('answers.index', [
+        'questions_count'   => $question->answers,
+        'answers'           => $question->answers_for_questions
+    ])
+
+    @include('answers.create', [
+        'buttonText' => 'Submit'
+    ])
+
+    {{-- <div class="bg-gray-700 m-16 mt-20">
         <div class="mx-auto p-4 flex justify-between">
             <h2 class="font-semibold p-3 text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ $question->answers }} Answers
@@ -52,7 +80,21 @@
         <hr>
         @foreach ($question->answers_for_questions as $answer)
             <div class="flex flex-col">
-                <div class="mt-6">
+                <div class="mt-6 flex px-4">
+                    <div class="flex flex-col px-2 justify-evenly items-center">
+                        <a title="This helps to my question" href="#">
+                            <i class="fa fa-3x fa-caret-up"></i>
+                        </a>
+                        <span class="text-white">
+                            140
+                        </span>
+                        <a title="This not helps to my question" href="#">
+                            <i class="fa fa-3x fa-caret-down"></i>
+                        </a>
+                        <a title="Mark this answer as best answer" href="#">
+                            <i class="fa fa-2x fa-solid fa-check text-green-500"></i>
+                        </a>
+                    </div>
                     <div class="p-5 text-white bg-gray-700">
                         <p>{{ $answer->body }}</p>
                     </div>
@@ -74,7 +116,7 @@
             
             <hr>
         @endforeach
-    </div>
+    </div> --}}
 
 
 </x-guest-layout>

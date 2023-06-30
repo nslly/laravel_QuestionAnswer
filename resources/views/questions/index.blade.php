@@ -39,7 +39,6 @@
                                 <span class="block text-sm text-gray-500 dark:text-gray-500 font-light leading-snug">{{ $question->created_at->diffForHumans() }}</span>
                             </div>
                             <div class="flex flex-col ml-2">
-                            
                                 @can('delete-question', $question)
                                     <form class="flex justify-end" action="{{ route('questions.destroy', $question->slug) }}" method="POST" enctype="multipart/form-data">
                                         @method('delete')
@@ -65,6 +64,7 @@
                             <div class="ml-1 text-gray-500 py-2 dark:text-gray-400 font-light">{{ $question->views }} views</div>
                         </div>
                     </div>
+                    
                 </div>
             @endforeach
         </div>

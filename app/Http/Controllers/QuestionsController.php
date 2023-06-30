@@ -24,7 +24,7 @@ class QuestionsController extends Controller
     {
         $questions = Question::latest()->paginate(2);
 
-        $questions->load('user');
+
 
         return view('questions.index', [
             "questions" => $questions
