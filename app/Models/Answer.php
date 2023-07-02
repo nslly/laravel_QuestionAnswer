@@ -27,5 +27,9 @@ class Answer extends Model
         static::created(function ($answer) {
             $answer->question->increment('answers');
         });
+
+        static::deleted(function ($answer) {
+            $answer->question->decrement('answers');
+        });
     }
 }

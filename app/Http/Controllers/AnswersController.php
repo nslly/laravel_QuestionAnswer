@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AnswersController extends Controller
 {
+
+    public function __construct() 
+    {
+        return $this->middleware('auth')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -65,9 +72,16 @@ class AnswersController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit(Question $question, Answer $answer)
     {
-        //
+        if (Gate::allows('update-answer', $answer)) {
+            return view('answers.edit', [
+                'answer'    => $answer,
+                'question'  => $question
+            ]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -77,9 +91,15 @@ class AnswersController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Question $question, Answer $answer)
     {
-        //
+        $validate = $request->validate([
+            'body'  => 'required'
+        ]);
+
+        $answer->update($validate);
+
+        return redirect(route('questions.show', $question->slug))->with('success', "Your answer is now updated");
     }
 
     /**
@@ -88,8 +108,13 @@ class AnswersController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Question $question, Answer $answer)
     {
-        //
+        if (Gate::allows('delete-answer', $answer)) {
+            $answer->delete();
+            return redirect(route('questions.show', $question->slug))->with('success', "Your answer is deleted");
+        } else {
+            abort(403);
+        }
     }
 }

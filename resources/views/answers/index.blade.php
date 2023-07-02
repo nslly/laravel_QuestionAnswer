@@ -10,6 +10,22 @@
     @include('layouts._messagesSuccess');
     @foreach ($answers as $answer)
         <div class="flex flex-col">
+            <div class="flex justify-end items-center mt-6 mr-4">
+                @can('update-answer', $answer)
+                    <div class="bg-cyan-500 text-white border-2 mr-2 py-2 px-4 border-cyan-500">
+                        <a href="{{ route('questions.answers.edit', [$question->slug, $answer->id]) }}"><span >Edit</span></a>
+                    </div>
+                @endcan
+                @can('delete-answer', $answer)
+                    <div class="text-white font-bold bg-red-500  border-2 py-2 px-3 border-red-500">
+                        <form action="{{ route('questions.answers.destroy', [$question->slug, $answer->id]) }}" method="POST" enctype="multipart/form-data">
+                            @method('delete')
+                            @csrf
+                            <button type="submit">X</button>
+                        </form>
+                    </div>
+                @endcan
+            </div>
             <div class="mt-6 flex px-4">
                 <div class="flex flex-col px-2 justify-evenly items-center">
                     <a title="This helps to my question" href="#">
