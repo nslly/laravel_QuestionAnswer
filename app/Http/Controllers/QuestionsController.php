@@ -22,7 +22,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::latest()->paginate(2);
+        $questions = Question::with('user')->latest()->paginate(2);
 
 
 
@@ -74,7 +74,7 @@ class QuestionsController extends Controller
     public function show(Question $question)
     {
 
-        $question->increment('views');
+        $question->with('user')->increment('views');
         
         return view("questions.show", [
             'question' => $question

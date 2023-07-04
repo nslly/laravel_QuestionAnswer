@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswersBestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,8 @@ Route::resource('/questions', QuestionsController::class);
 // Route::get('/questions/{question:slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
 Route::resource('questions.answers', AnswersController::class)->except(['index', 'show', 'create']);
+
+Route::post('/answers/{answer}/best_answer', AnswersBestController::class)->name('answers.accept');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

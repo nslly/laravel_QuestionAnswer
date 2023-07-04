@@ -42,5 +42,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-answer', function (User $user, Answer $answer) {
             return $user->id === $answer->user_id;
         });
+
+        Gate::define('accept-best-answer', function(User $user, Answer $answer) {
+            return $user->id === $answer->question->user_id;
+        });
     }
 }

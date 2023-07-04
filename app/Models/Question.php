@@ -50,6 +50,12 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
+    public function acceptBestAnswer(Answer $answer) 
+    {
+        $answer->question->best_answer_id = $answer->id;
+        $answer->question->save();
+    }
+
 
 
     // protected function url(): Attribute 
