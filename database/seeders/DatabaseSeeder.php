@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
+use Database\Seeders\FavoritesSeeder;
+use Database\Seeders\QuestionsUsersAnswersSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,9 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        $this->call([
+            QuestionsUsersAnswersSeeder::class,
+            FavoritesSeeder::class
+        ]);
         
-        Question::factory()->count(rand(1,5))->create();
-        Answer::factory()->count(rand(1,5))->create();
+        
 
     }
 }

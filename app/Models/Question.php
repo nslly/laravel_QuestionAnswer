@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class Question extends Model
 {
@@ -40,6 +41,8 @@ class Question extends Model
         );
     }
 
+ 
+
     public function getRouteKeyName()
     {
         return 'slug';
@@ -55,6 +58,30 @@ class Question extends Model
         $answer->question->best_answer_id = $answer->id;
         $answer->question->save();
     }
+
+    public function favorites() 
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    protected function isFavorited(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->favorites()->where('user_id', Auth::id())->count() > 0
+        );
+    }
+
+    protected function favoritesCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->favorites->count()
+        );
+    }
+
+    // public function isfavorited() 
+    // {
+    //     return $this->favorites()->where('user_id', auth()->id)->count() > 0;
+    // }
 
 
 

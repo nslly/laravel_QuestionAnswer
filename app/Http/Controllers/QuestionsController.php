@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\AskQuestionRequest;
-
 class QuestionsController extends Controller
 {
 
