@@ -6,8 +6,10 @@ use App\Models\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\AskQuestionRequest;
+
 class QuestionsController extends Controller
 {
 
@@ -22,6 +24,7 @@ class QuestionsController extends Controller
     public function index()
     {
         $questions = Question::with('user')->latest()->paginate(2);
+
 
 
 
@@ -55,7 +58,8 @@ class QuestionsController extends Controller
     {
 
         $validated = $request->validated();
-        
+
+
 
         $request->user()->questions()->create($validated);
 

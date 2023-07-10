@@ -23,7 +23,6 @@ class QuestionFactory extends Factory
             'views'     => $this->faker->randomNumber(5),
             // 'answers'   => $this->faker->randomNumber(5),
             'user_id'   => User::factory(),
-            'votes'     => rand(-3, 10), 
         ];
     }
 }

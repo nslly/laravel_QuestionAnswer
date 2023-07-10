@@ -25,16 +25,27 @@
         <div class="mt-12">
             <div class="flex px-4">
                 <div class="flex flex-col px-2 justify-evenly items-center">
-                    {{-- <i class="fa fa-2x fa-solid fa-check"></i> --}}
-                    <a title="This helps to my question" href="#">
-                        <i class="fa fa-3x fa-caret-up"></i>
+                    <a title="This helps to my question" 
+                        class="cursor-pointer"
+                        onclick="event.preventDefault(); document.getElementById('question-vote-up-{{ $question->slug }}').submit()">
+                            <i class="fa fa-3x fa-caret-up "></i>
                     </a>
+                    <form id="question-vote-up-{{ $question->slug }}" action="/questions/{{ $question->slug }}/vote" method="POST" enctype="multipart/form-data" class="hidden">
+                        @csrf
+                        <input type="hidden" name="vote" value="1">
+                    </form>
                     <span class="text-white">
-                        140
+                        {{ $question->votes }}
                     </span>
-                    <a title="This not helps to my question" href="#">
+                    <a title="This not helps to my question" 
+                        class="cursor-pointer"
+                        onclick="event.preventDefault(); document.getElementById('question-vote-down-{{ $question->slug }}').submit()">
                         <i class="fa fa-3x fa-caret-down"></i>
                     </a>
+                    <form id="question-vote-down-{{ $question->slug }}" action="/questions/{{ $question->slug }}/vote" method="POST" enctype="multipart/form-data" class="hidden">
+                        @csrf
+                        <input type="hidden" name="vote" value="-1">
+                    </form>
                     <a title="Click to mark as a favorite question" class="cursor-pointer"
                         onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->slug }}').submit()">
                         @auth

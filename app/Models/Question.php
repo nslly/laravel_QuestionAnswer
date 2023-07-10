@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Answer;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Question extends Model
 {
@@ -77,6 +78,14 @@ class Question extends Model
             get: fn () => $this->favorites->count()
         );
     }
+
+    public function votesUser(): MorphToMany
+    {
+        return $this->morphToMany(User::class, 'votable');
+    }
+
+
+    
 
     // public function isfavorited() 
     // {

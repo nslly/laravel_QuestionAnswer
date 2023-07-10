@@ -27,33 +27,43 @@
                 @endcan
             </div>
             <div class="mt-6 flex px-4">
-                @can ('accept-best-answer', $answer)
-                    <div class="flex flex-col px-2 justify-evenly items-center">
-                        <a title="This helps to my question" href="#">
-                            <i class="fa fa-3x fa-caret-up"></i>
-                        </a>
-                        <span class="text-white">
-                            140
-                        </span>
-                        <a title="This not helps to my question" href="#">
-                            <i class="fa fa-3x fa-caret-down"></i>
-                        </a>
-
+                <div class="flex flex-col px-2 justify-evenly items-center">
+                    <a title="This helps to my question"
+                    class="cursor-pointer"
+                    onclick="event.preventDefault(); document.getElementById('answer-vote-up-{{ $answer->id }}').submit()">
+                        <i class="fa fa-3x fa-caret-up "></i>
+                    </a>
+                    <form id="answer-vote-up-{{ $answer->id}}" action="/answers/{{ $answer->id }}/vote" method="POST" enctype="multipart/form-data" class="hidden">
+                        @csrf
+                        <input type="hidden" name="vote" value="1">
+                    </form>
+                    <span class="text-white">
+                        {{ $answer->votes_count }}
+                    </span>
+                    <a title="This not helps to my question" 
+                        class="cursor-pointer"
+                        onclick="event.preventDefault(); document.getElementById('answer-vote-down-{{ $answer->id }}').submit()">
+                        <i class="fa fa-3x fa-caret-down"></i>
+                    </a>
+                    <form id="answer-vote-down-{{ $answer->id }}" action="/answers/{{ $answer->id }}/vote" method="POST" enctype="multipart/form-data" class="hidden">
+                        @csrf
+                        <input type="hidden" name="vote" value="-1">
+                    </form>
+                    @can ('accept-best-answer', $answer)
                         <a title="Mark this answer as best answer"
                             class="cursor-pointer"
                             onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit()">
                             <i class="fa fa-2x fa-solid fa-check {{ $answer->question->best_answer_id === $answer->id ? 'text-green-500' : ''  }} "></i>
                         </a>
-
-                    </div>
-                @else
-                    @if ($answer->best_answer)
-                        <a title="This is the best answer according to {{ $question->user->name }}"
-                            class="cursor-pointer">
-                            <i class="fa fa-2x fa-solid fa-check {{ $answer->question->best_answer_id === $answer->id ? 'text-green-500' : ''  }} "></i>
-                        </a>
-                    @endif
+                    @else
+                        @if ($answer->best_answer)
+                            <a title="This is the best answer according to {{ $question->user->name }}"
+                                class="cursor-pointer">
+                                <i class="fa fa-2x fa-solid fa-check {{ $answer->question->best_answer_id === $answer->id ? 'text-green-500' : ''  }} "></i>
+                            </a>
+                        @endif
                 @endcan
+                </div>
                 <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST" enctype="multipart/form-data" class="hidden">
                     @csrf
                 </form>

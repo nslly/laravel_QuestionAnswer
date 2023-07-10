@@ -22,7 +22,6 @@ class AnswerFactory extends Factory
             'body'          => fake()->paragraphs(rand(5, 8), true),
             'user_id'       => User::pluck('id')->random(),
             'question_id'   => Question::pluck('id')->random(),
-            'votes_count'   => rand(0,5)
         ];
     }
 }

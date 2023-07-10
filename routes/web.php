@@ -5,7 +5,9 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\VoteAnswerController;
 use App\Http\Controllers\AnswersBestController;
+use App\Http\Controllers\VoteQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ Route::resource('/questions', QuestionsController::class);
 Route::resource('questions.answers', AnswersController::class)->except(['index', 'show', 'create']);
 
 Route::post('/answers/{answer}/best_answer', AnswersBestController::class)->name('answers.accept');
+
+Route::post('questions/{question}/vote', VoteQuestionController::class);
+Route::post('/answers/{answer}/vote', VoteAnswerController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

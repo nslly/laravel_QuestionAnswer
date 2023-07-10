@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
+use Database\Seeders\VotesSeeder;
 use Database\Seeders\FavoritesSeeder;
 use Database\Seeders\QuestionsUsersAnswersSeeder;
 
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             QuestionsUsersAnswersSeeder::class,
-            FavoritesSeeder::class
+            FavoritesSeeder::class,
+            VotesSeeder::class
         ]);
         
         
