@@ -26,7 +26,7 @@
             <div class="p-5 text-white bg-gray-700">
                 <form action="{{ route('questions.update', $question->slug) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
-                    @include('questions._form', ['buttonText' => 'Edit Question'])
+                    @include('questions._form', ['buttonText' => 'Update Question'])
                 </form>
             </div>
         </div>

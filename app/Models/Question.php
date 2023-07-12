@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Parsedown;
 use App\Models\User;
 use App\Models\Answer;
 use Illuminate\Support\Str;
@@ -49,9 +50,17 @@ class Question extends Model
         return 'slug';
     }
 
+    public function bodyHtmlAttribute(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->bodyHtml()
+        );
+    }
+
+
     public function answers_for_questions() 
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class)->orderBy('votes_count', 'DESC');
     }
 
     public function acceptBestAnswer(Answer $answer) 
@@ -84,6 +93,20 @@ class Question extends Model
         return $this->morphToMany(User::class, 'votable');
     }
 
+    protected function excerpt(): Attribute
+    {
+        return Attribute::make(
+            get: fn () =>  Str::limit(strip_tags($this->bodyHtml()), 300)
+        );
+    }
+
+
+    protected function bodyHtml() 
+    {
+        return Parsedown::instance()->text($this->body);
+    }
+
+    
 
     
 

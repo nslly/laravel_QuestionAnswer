@@ -29,7 +29,7 @@
         </div>
     
         <div class="flex justify-around mt-12">
-            @foreach ($questions as $question)
+            @forelse($questions as $question)
                 <div class="p-5 bg-gray-700 flex">
                     <div class="px-5 py-4 bg-white dark:bg-gray-800 flex flex-col justify-between shadow-md rounded-lg max-w-lg">
                         <div class="flex mb-4 justify-between">
@@ -51,7 +51,9 @@
                                 @endcan
                             </div>
                         </div>
-                        <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">{{ $question->body }}</p>
+                        <div class="excerpt">
+                            <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">{{ $question->excerpt }}</p>
+                        </div>
                         <div class="flex justify-between mt-5">
                             <div class="flex">
                                 @if($question->answers > 0)
@@ -66,7 +68,17 @@
                     </div>
                     
                 </div>
-            @endforeach
+            @empty 
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                    <div class="flex">
+                        <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                        <div>
+                            <p class="font-bold">No records</p>
+                            <p class="text-sm">There are no questions.</p>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
         </div>
         <div class="py-5  mt-12 mx-auto flex justify-center w-full items-center">
             {{ $questions->links() }}
