@@ -13,12 +13,13 @@
         </div>
     @endif
     
-
+    
     <div class="bg-gray-700 m-16">
         <div class="mx-auto p-4 flex justify-between">
             <h2 class="font-semibold text-xl p-2 text-gray-800 dark:text-gray-200 leading-tight">
                 ALL QUESTIONS
             </h2>
+            <index></index>
             <a class="text-md border-gray-900 bg-gray-900 shadow-md rounded-lg p-2 text-gray-800 dark:text-gray-200" href="{{ route('questions.create') }}">ADD QUESTIONS</a>
         </div>
 

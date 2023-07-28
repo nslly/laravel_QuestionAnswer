@@ -1,6 +1,6 @@
 <div>
     <span class="block text-xl py-1 text-gray-500 dark:text-gray-400 font-bold leading-snug">
-        {{ $label . ' ' . $model->created_at->diffForHumans() }}
+        {{ $label . ' ' . $model->created_date}}
     </span>
 </div>
 <div class="flex">

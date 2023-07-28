@@ -73,10 +73,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col ml-6 py-6">
-                    @include ('shared.author', [
-                        'label' => 'Answered',
-                        'model' => $answer
-                    ])
+                    <user-info label='Answered' :model= "{{ $answer }}" :model-user="{{ $answer->user }}"></user-info>
                 </div>
             </div>
             

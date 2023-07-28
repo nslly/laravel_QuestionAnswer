@@ -1,7 +1,10 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
+import { createApp } from 'vue';
+import Index from './components/Index.vue';
+import UserInfo from './components/UserInfo.vue';
 
-window.Alpine = Alpine;
-
-Alpine.start();
+const app = createApp({})
+    app.component('Index', Index);
+    app.component('UserInfo', UserInfo);
+    app.mount('#app');

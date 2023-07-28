@@ -13,12 +13,21 @@ class Answer extends Model
 
     protected $fillable = ['body', 'user_id'];
 
+    protected $appends = ['created_date'];
+
     public function question() {
         return $this->belongsTo(Question::class);
     }
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    protected function createdDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->created_at->diffForHumans()
+        );
     }
 
     protected function bestAnswer(): Attribute

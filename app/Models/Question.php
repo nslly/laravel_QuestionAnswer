@@ -21,6 +21,8 @@ class Question extends Model
         'body'
     ];
 
+    protected $appends = ['created_date'];
+
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -43,17 +45,23 @@ class Question extends Model
         );
     }
 
- 
+    protected function createdDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->created_at->diffForHumans()
+        );
+    }
+
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    public function bodyHtmlAttribute(): Attribute
+    protected function bodyHtmlAttribute(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->bodyHtml()
+            get: fn () =>  $this->bodyHtml()
         );
     }
 

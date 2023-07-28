@@ -20,9 +20,7 @@ use App\Http\Controllers\VoteQuestionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [QuestionsController::class, 'index']);
 
 Route::resource('/questions', QuestionsController::class); 
 // Route::get('/questions/{question:slug}', [QuestionsController::class, 'show'])->name('questions.show');

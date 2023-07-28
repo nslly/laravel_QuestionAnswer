@@ -78,9 +78,11 @@ class QuestionsController extends Controller
     {
 
         $question->with('user')->increment('views');
+
         
         return view("questions.show", [
-            'question' => $question
+            'question' => $question,
+
         ]);
     }
 
