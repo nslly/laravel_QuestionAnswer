@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Parsedown;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ class Answer extends Model
 
     protected $fillable = ['body', 'user_id'];
 
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'body_html'];
 
     public function question() {
         return $this->belongsTo(Question::class);
@@ -36,6 +37,15 @@ class Answer extends Model
             get:  fn ($value) => $this->id === $this->question->best_answer_id
         );
     }
+
+    protected function bodyHtml(): Attribute
+    {
+
+        return Attribute::make(
+            get: fn () => Parsedown::instance()->text($this->body)
+        );
+    }
+
 
     
     public static function boot(): void
