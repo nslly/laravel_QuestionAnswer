@@ -13,12 +13,20 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 dark:bg-gray-900 antialiased">
         <div class=" sm:pt-0 bg-gray-900 dark:bg-gray-900" id="app">
             {{ $slot }}
         </div>
     </body>
+    
+    <!-- Scripts -->
+    <script>
+        window.Auth = {!! json_encode([
+            'signedIn' => Auth::check(),
+            'user'     => Auth::user()
+        ]) !!}
+    </script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </html>
+

@@ -63,6 +63,10 @@ class QuestionsController extends Controller
 
         $request->user()->questions()->create($validated);
 
+        if(request()->expectsJson()) {
+            return response()->json(null, 204);
+        }
+
 
         return redirect(route('questions.index'))->with('success', "The Questions are successfuly created.");
 
@@ -128,9 +132,13 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
+        if(request()->expectsJson()) {
+            return response()->json(null, 204);
+        }
 
         if (Gate::allows('delete-question',$question)) {
             $question->delete();
+    
             return redirect(route('questions.index'));
         } else {
             abort(403);

@@ -46,24 +46,14 @@
                         @csrf
                         <input type="hidden" name="vote" value="-1">
                     </form>
-                    <a title="Click to mark as a favorite question" class="cursor-pointer"
-                        onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->slug }}').submit()">
-                        @auth
-                            <i class="fa fa-2x fa-solid fa-star {{ $question->is_favorited ? 'text-yellow-500' : 'text-gray-900' }}"></i>
-                        @else 
-                            <i class="fa fa-2x fa-solid fa-star text-gray-90"></i>
-                        @endauth
-                    </a>
-                    <span class="text-white">
-                        {{ $question->favorites_count }}
-                    </span>
+                    <favorite :question="{{ $question }}"></favorite>
+                    <form id="favorite-question-{{ $question->slug }}" action="/questions/{{ $question->slug }}/favorites" method="POST" enctype="multipart/form-data" class="hidden">
+                        @csrf
+                        @if ($question->is_favorited)
+                            @method('delete')
+                        @endif
+                    </form>
                 </div>
-                <form id="favorite-question-{{ $question->slug }}" action="/questions/{{ $question->slug }}/favorites" method="POST" enctype="multipart/form-data" class="hidden">
-                    @csrf
-                    @if ($question->is_favorited)
-                        @method('delete')
-                    @endif
-                </form>
                 <div class="p-5 text-white bg-gray-700">
                     {{ $question->body}}
                 </div>
