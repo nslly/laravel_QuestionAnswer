@@ -27,15 +27,15 @@
                 return window.Auth.signedIn;
             },
             classes () {
-                if(this.signedIn) {
+                if(this.signedIn && this.isFavorited) {
                     return [
                         'fa fa-2x fa-solid fa-star',
-                        this.isFavorited ? 'text-yellow-500' : 'text-gray-900'
+                        'text-yellow-500'
                     ]
                 } else {
                     return [
                         'fa fa-2x fa-solid fa-star',
-                        'text-gray-500'
+                        'text-gray-900'
                     ]
                 }
             },

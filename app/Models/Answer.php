@@ -14,7 +14,7 @@ class Answer extends Model
 
     protected $fillable = ['body', 'user_id'];
 
-    protected $appends = ['created_date', 'body_html'];
+    protected $appends = ['created_date', 'body_html', 'best_answer'];
 
     public function question() {
         return $this->belongsTo(Question::class);
@@ -34,7 +34,7 @@ class Answer extends Model
     protected function bestAnswer(): Attribute
     {
         return Attribute::make(
-            get:  fn ($value) => $this->id === $this->question->best_answer_id
+            get:  fn () => $this->id === $this->question->best_answer_id
         );
     }
 

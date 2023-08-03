@@ -8,7 +8,7 @@
         <div class="flex">
             <img class="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png" alt="profile picture">
             <span class="text-md mt-1 ml-2 py-1 text-gray-500 dark:text-gray-500 font-bold leading-snug">
-                {{ user.name }}
+                {{ user }}
             </span>
         </div>
     </div>
@@ -16,10 +16,10 @@
 
 <script>
     export default {
-        props: ['label', 'modelUser', 'model'],
+        props: ['label', 'model', 'modelUser'],
         data() {
             return {
-                user: this.modelUser
+                user: this.modelUser.name
             }
         },
         computed: {

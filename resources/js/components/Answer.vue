@@ -18,7 +18,7 @@
                         <div class="text-white cursor-pointer font-bold bg-red-500  border-2 py-2 px-3 border-red-500">
                             <button @click="destroy">X</button>
                         </div>
-                    <!-- @endcan -->
+
                 </div>
                 <div class="mt-6 flex px-4">
                     <div class="flex flex-col px-2 justify-evenly items-center">
@@ -35,24 +35,14 @@
                             onclick="event.preventDefault(); document.getElementById('answer-vote-down-{{ answer.id }}').submit()">
                             <i class="fa fa-3x fa-caret-down"></i>
                         </a>
-                            <a title="Mark this answer as best answer"
-                                class="cursor-pointer"
-                                onclick="event.preventDefault(); document.getElementById('accept-answer-{{ answer.id }}').submit()">
-                                <i class="fa fa-2x fa-solid fa-check {{ answer.question.best_answer_id === answer.id ? 'text-green-500' : ''  }} "></i>
-                            </a>
-                            <div v-if="answer.best_answer">
-                                <a title="This is the best answer according to {{ question.user.name }}"
-                                    class="cursor-pointer">
-                                    <i class="fa fa-2x fa-solid fa-check {{ answer.question.best_answer_id === answer.id ? 'text-green-500' : ''  }} "></i>
-                                </a>
-                            </div>
+                        <accept  :answer="answer" :question="question"></accept>
                     </div>
                     <div class="p-5 text-white bg-gray-700">
                         <p v-html="bodyHtml"></p>
                     </div>
                 </div>
                 <div class="flex flex-col ml-6 py-6">
-                    <user-info label='Answered' :model= "answer" :model-user="modelUser"></user-info>
+                    <user-info label='Answered' :model="answer" :model-user="modelUser"></user-info>
                 </div>
             </div>
         </div>   
@@ -68,9 +58,9 @@
                 editing: false,
                 body: this.answer.body,
                 id: this.answer.id,
-                questionId: this.question.slug,
+                questionId: this.answer.question.slug,
                 bodyHtml: this.answer.body_html,
-                beforeEditCache: null
+                beforeEditCache: null,
             }
         },
         methods: {

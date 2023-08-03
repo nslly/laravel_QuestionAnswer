@@ -120,10 +120,8 @@ class AnswersController extends Controller
         if (Gate::allows('delete-answer', $answer)) {
 
             if(request()->expectsJson()) {
-                return response()->json([
+                response()->json([
                     'message'   => "Your answer is deleted",
-                    'delete'    => $answer->delete(),
-                    'redirect' => redirect(route('questions.show', $question->slug))
                 ]);
             }
             $answer->delete();

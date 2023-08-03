@@ -1,5 +1,5 @@
 <answer :answer="{{ $answer }}" :question="{{ $question }}" :model-user="{{ $answer->user }}">
-    <div class="flex flex-col">
+    {{-- <div class="flex flex-col">
         <form action="" v-if="editing">
             <textarea v-model="body" cols="30" rows="10"></textarea>
             <button @click.prevent="editing = false">Update</button>
@@ -71,6 +71,6 @@
                 <user-info label='Answered' :model= "{{ $answer }}" :model-user="{{ $answer->user }}"></user-info>
             </div>
         </div>
-    </div>
+    </div> --}}
 </answer>
 
