@@ -29,7 +29,7 @@ Route::resource('questions.answers', AnswersController::class)->except(['index',
 
 Route::post('/answers/{answer}/best_answer', AnswersBestController::class)->name('answers.accept');
 
-Route::post('questions/{question}/vote', VoteQuestionController::class);
+Route::post('/questions/{question}/vote', VoteQuestionController::class);
 Route::post('/answers/{answer}/vote', VoteAnswerController::class);
 
 Route::get('/dashboard', function () {

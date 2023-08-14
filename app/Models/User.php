@@ -72,14 +72,15 @@ class User extends Authenticatable
     public function voteQuestion(Question $question, $vote)
     {
 
-        $this->_vote($this->voteQuestions(), $question, $vote, 'votes');
+        return $this->_vote($this->voteQuestions(), $question, $vote, 'votes');
 
     }
 
     public function voteAnswer(Answer $answer, $vote)
     {
 
-        $this->_vote($this->voteAnswers(), $answer, $vote, 'votes_count');
+        return $this->_vote($this->voteAnswers(), $answer, $vote, 'votes_count');
+        
 
     }
 
@@ -96,5 +97,13 @@ class User extends Authenticatable
         $upVotes = (int) $model->votesUser()->wherePivot('vote', 1)->sum('vote');
         $model->$vote_table_column = $upVotes + $downVotes;
         $model->save();
+
+        if($vote_table_column == 'votes_count') {
+            return $model->votes_count;
+        } else {
+            return $model->votes;
+
+        }
+
     }
 }

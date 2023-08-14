@@ -1,16 +1,18 @@
 <template>
     <div>
         <!-- @can ('accept-best-answer', $answer) -->
-        <a v-if="canAccept" title="Mark this answer as best answer"
+        <a v-if="canAccept" title="Mark as best answer"  
             class="cursor-pointer" @click.prevent="create">
             <i :class="classes"></i>
         </a>
         <!-- @else
             @if ($answer->best_answer) -->
-        <a v-if="accepted" title="This is the best answer according to {{ $question.user.name }}"
+        <a v-if="accepted"
+            title="This is the best answer"
             class="cursor-pointer">
             <i :class="classes"></i>
         </a>
+        
             <!-- @endif
         @endcan -->
     </div>

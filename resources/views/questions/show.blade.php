@@ -25,7 +25,10 @@
         <div class="mt-12">
             <div class="flex px-4">
                 <div class="flex flex-col px-2 justify-evenly items-center">
-                    <a title="This helps to my question" 
+
+
+                    <vote  :model="{{ $question }}" :name="'question'"></vote>
+                    {{-- <a title="This helps to my question" 
                         class="cursor-pointer"
                         onclick="event.preventDefault(); document.getElementById('question-vote-up-{{ $question->slug }}').submit()">
                             <i class="fa fa-3x fa-caret-up "></i>
@@ -46,7 +49,7 @@
                         @csrf
                         <input type="hidden" name="vote" value="-1">
                     </form>
-                    <favorite :question="{{ $question }}"></favorite>
+                    <favorite :question="{{ $question }}"></favorite> --}}
                     <form id="favorite-question-{{ $question->slug }}" action="/questions/{{ $question->slug }}/favorites" method="POST" enctype="multipart/form-data" class="hidden">
                         @csrf
                         @if ($question->is_favorited)

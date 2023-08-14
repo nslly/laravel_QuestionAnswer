@@ -8,7 +8,7 @@
             </form>
             <div v-else>
                 
-                <div class="flex justify-end items-center mt-6 mr-4">
+                <div v-if="canAccept" class="flex justify-end items-center mt-6 mr-4">
                         <a @click="edit" >
                             <div class="bg-cyan-500 cursor-pointer text-white border-2 mr-2 py-2 px-4 border-cyan-500">
                                 <span >Edit</span>
@@ -21,7 +21,10 @@
 
                 </div>
                 <div class="mt-6 flex px-4">
-                    <div class="flex flex-col px-2 justify-evenly items-center">
+
+
+                    <vote :model="answer" :name="'answer'"></vote>
+                    <!-- <div class="flex flex-col px-2 justify-evenly items-center">
                         <a title="This helps to my question"
                         class="cursor-pointer"
                         onclick="event.preventDefault(); document.getElementById('answer-vote-up-{{ answer.id  }}').submit()">
@@ -36,7 +39,7 @@
                             <i class="fa fa-3x fa-caret-down"></i>
                         </a>
                         <accept  :answer="answer" :question="question"></accept>
-                    </div>
+                    </div> -->
                     <div class="p-5 text-white bg-gray-700">
                         <p v-html="bodyHtml"></p>
                     </div>
@@ -53,6 +56,7 @@
     export default {
         name: 'Answer',
         props: ['answer', 'question', 'modelUser'],
+        inject: ['authorize'],
         data() {
             return {
                 editing: false,
@@ -105,6 +109,10 @@
             },
             endPoint () {
                 return `/questions/${this.questionId}/answers/${this.id}`;
+            },
+            
+            canAccept() {
+                return this.authorize('modify', this.answer);
             }
         }
     }

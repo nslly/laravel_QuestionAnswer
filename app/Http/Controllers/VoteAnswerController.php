@@ -16,7 +16,14 @@ class VoteAnswerController extends Controller
     {
         $vote = $request->input('vote');
 
-        $request->user()->voteAnswer($answer, $vote);
+        $votesCount = $request->user()->voteAnswer($answer, $vote);
+        
+        if(request()->expectsJson()) {
+            return response()->json([
+                'message'       => "Thank you for the feedback",
+                'votesCount'    => $votesCount
+            ]);
+        }
 
         return back();
     }
