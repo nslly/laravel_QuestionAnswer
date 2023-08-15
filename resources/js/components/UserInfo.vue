@@ -16,10 +16,10 @@
 
 <script>
     export default {
-        props: ['label', 'model', 'modelUser'],
+        props: ['label', 'model'],
         data() {
             return {
-                user: this.modelUser.name
+                user: this.model.user.name
             }
         },
         computed: {

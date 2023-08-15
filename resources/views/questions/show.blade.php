@@ -62,17 +62,13 @@
                 </div>
             </div>
             <div class="flex flex-col ml-6 py-6">
-                <user-info label='Asked' :model= "{{ $question }}" :model-user = "{{ $question->user }}"></user-info>
+                <user-info label='Asked' :model= "{{ $question->load('user') }}"></user-info>
             </div>
         </div>
     </div>
 
 
-
-    @include('answers.index', [
-        'questions_count'   => $question->answers,
-        'answers'           => $question->answers_for_questions
-    ])
+    <answers :answers="{{ $question->answers_for_questions->load('user') }}" :count="{{ $question->answers }}" :question="{{ $question->load('user') }}"></answers>
 
     @include('answers.create', [
         'buttonText' => 'Submit'

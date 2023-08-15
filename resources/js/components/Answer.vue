@@ -1,5 +1,6 @@
 <template>
     <div>
+        <hr>
         <div class="flex flex-col" id="fade">
             <form v-if="editing" @submit.prevent="update" class="p-4">
                 <textarea required v-model="body" class="bg-gray-800  text-white w-full leading-tight shadow-sm focus:border-white focus:ring-blue appearance-none focus:outline-none focus:shadow-outline" rows="10"></textarea>
@@ -45,7 +46,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col ml-6 py-6">
-                    <user-info label='Answered' :model="answer" :model-user="modelUser"></user-info>
+                    <user-info label='Answered' :model="answer"></user-info>
                 </div>
             </div>
         </div>   
@@ -55,7 +56,7 @@
 <script>
     export default {
         name: 'Answer',
-        props: ['answer', 'question', 'modelUser'],
+        props: ['answer'],
         inject: ['authorize'],
         data() {
             return {

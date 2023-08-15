@@ -5,8 +5,6 @@
             class="cursor-pointer" @click.prevent="create">
             <i :class="classes"></i>
         </a>
-        <!-- @else
-            @if ($answer->best_answer) -->
         <a v-if="accepted"
             title="This is the best answer"
             class="cursor-pointer">
@@ -21,7 +19,7 @@
 <script>
     export default {
         name: 'Accept',
-        props: ['answer', 'question'],
+        props: ['answer'],
         inject: ['authorize'],
         data() {
             return {
@@ -30,15 +28,22 @@
             }
         },
         methods: {
-            create() {
-                axios.post(this.endPoint)
-                .then(res => {
-                    alert(res.data.message);
-                    this.isBest = true;
-                });
-                location.reload();
-
+            async create() {
+                try {
+                    await axios.post(this.endPoint)
+                    .then(res => {
+                        alert(res.data.message);
+                        this.isBest = res.data.save;
+                        
+                    });
+                    // location.reload();
+                } catch(err) {
+                    console.log(err);
+                }
             }
+        },
+        created() {
+            this.classes;
         },
         computed: {
             endPoint () {

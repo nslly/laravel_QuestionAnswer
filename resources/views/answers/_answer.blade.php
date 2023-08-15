@@ -1,4 +1,4 @@
-<answer :answer="{{ $answer }}" :question="{{ $question }}" :model-user="{{ $answer->user }}">
+{{-- <answer :answer="{{ $answer }}" :question="{{ $question }}" :model-user="{{ $answer->user }}"> --}}
     {{-- <div class="flex flex-col">
         <form action="" v-if="editing">
             <textarea v-model="body" cols="30" rows="10"></textarea>
@@ -72,5 +72,5 @@
             </div>
         </div>
     </div> --}}
-</answer>
+{{-- </answer> --}}
 

@@ -75,6 +75,7 @@ class Question extends Model
     {
         $answer->question->best_answer_id = $answer->id;
         $answer->question->save();
+        return $this->best_answer_id;
     }
 
     public function favorites() 

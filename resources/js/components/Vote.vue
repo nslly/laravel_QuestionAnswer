@@ -61,13 +61,14 @@ import Accept from './Accept.vue';
             _vote(vote) {
                 if(!this.signedIn) {
                     alert(`You need to login first before you vote to ${this.name}`);
+                } else {
+                    axios.post(this.endPoint, {
+                        vote
+                    }).then(res => {
+                        alert(res.data.message);
+                        this.count = res.data.votesCount;
+                    });
                 }
-                axios.post(this.endPoint, {
-                    vote
-                }).then(res => {
-                    alert(res.data.message);
-                    this.count = res.data.votesCount;
-                });
             }
 
         }

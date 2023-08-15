@@ -25,8 +25,5 @@ class AnswersBestController extends Controller
         } else {
             abort(403);
         }
-
-      
-        
     }
 }
