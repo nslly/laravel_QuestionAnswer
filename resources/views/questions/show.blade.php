@@ -68,7 +68,7 @@
     </div>
 
 
-    <answers :answers="{{ $question->answers_for_questions->load('user') }}" :count="{{ $question->answers }}" :question="{{ $question->load('user') }}"></answers>
+    <answers :question="{{ $question->load('user') }}"></answers>
 
     @include('answers.create', [
         'buttonText' => 'Submit'

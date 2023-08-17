@@ -25,7 +25,7 @@ Route::get('/', [QuestionsController::class, 'index']);
 Route::resource('/questions', QuestionsController::class); 
 // Route::get('/questions/{question:slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
-Route::resource('questions.answers', AnswersController::class)->except(['index', 'show', 'create']);
+Route::resource('questions.answers', AnswersController::class)->except(['show', 'create']);
 
 Route::post('/answers/{answer}/best_answer', AnswersBestController::class)->name('answers.accept');
 
