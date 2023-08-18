@@ -21,7 +21,7 @@ class AnswersController extends Controller
      */
     public function index(Question $question)
     {
-        return $question->answers_for_questions()->with('user')->simplePaginate(1);
+        return $question->answers_for_questions()->with('user')->simplePaginate(2);
     }
 
     /**

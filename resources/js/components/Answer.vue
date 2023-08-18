@@ -91,15 +91,12 @@
                     console.log("There something error", err);
                 })
             },
-            reloadPage() {
-                location.reload;
-            },
             destroy() {
 
                 if(confirm("Are you sure you want to delete?")) {
                     axios.delete(this.endPoint)
                     .then(res => {
-                        location.reload();
+                        this.$emit('delete');
                     });
                 }
             }

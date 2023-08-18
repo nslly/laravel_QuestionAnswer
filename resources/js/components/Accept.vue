@@ -17,6 +17,8 @@
 </template>
 
 <script>
+
+
     export default {
         name: 'Accept',
         props: ['answer'],
@@ -27,23 +29,22 @@
                 id: this.answer.id,
             }
         },
-        methods: {
-            async create() {
-                try {
-                    await axios.post(this.endPoint)
-                    .then(res => {
-                        alert(res.data.message);
-                        this.isBest = res.data.save;
-                        
-                    });
-                    // location.reload();
-                } catch(err) {
-                    console.log(err);
-                }
-            }
-        },
         created() {
-            this.classes;
+            this.emitter.on('accept', id => {   // *Listen* for event
+                this.isBest = (id === this.id)
+            });
+        },
+        methods: {
+            create() {
+                axios.post(this.endPoint)
+                .then(res => {
+                    alert(res.data.message);
+                    this.isBest = true;
+                    this.emitter.emit('accept', this.id); //setting up events
+                });
+                // location.reload();
+                
+            }
         },
         computed: {
             endPoint () {
@@ -56,6 +57,9 @@
             accepted() {
                 return !this.canAccept && this.isBest;
             },
+            // cc() {
+            //     console.log(this.isBest);
+            // },
 
             classes() {
                 return [

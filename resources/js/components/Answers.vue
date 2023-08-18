@@ -9,7 +9,7 @@
         
             <hr>
 
-            <answer v-for="answer in answers" :key="answer.id" :answer="answer"></answer>
+            <answer @delete="remove(index)" v-for="(answer, index) in answers" :key="answer.id" :answer="answer"></answer>
 
             <hr>
 
@@ -52,6 +52,10 @@ import Answer from './Answer.vue';
                     this.answers.push(...data.data);
                     this.nextUrl = data.next_page_url;
                 })
+            },
+            remove(index) {
+                this.answers.splice(index,1);
+                this.count--;
             }
         },
         computed: {

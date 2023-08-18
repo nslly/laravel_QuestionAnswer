@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@k90mirzaei/vue-toast": "^1.0.3",
+        "mitt": "^3.0.1",
         "uuid": "^9.0.0",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1"
