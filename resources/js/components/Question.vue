@@ -57,10 +57,12 @@
 <script>
 import Vote from './Vote.vue';
 import UserInfo from './UserInfo.vue';
+import modification from '../mixins/modification.js';
     export default {
         name: "Question",
         props: ['question'],
         inject: ['authorize'],
+        mixins: [modification],
         components: {
             Vote,
             UserInfo
@@ -70,7 +72,7 @@ import UserInfo from './UserInfo.vue';
                 title: this.question.title,
                 body: this.question.body,
                 bodyHtml: this.question.body_html,
-                editing: false,
+                
                 id: this.question.slug,
                 beforeEditCache: {}
             }
@@ -84,54 +86,39 @@ import UserInfo from './UserInfo.vue';
             },
             deleteQuestion() {
                 return this.authorize('deleteQuestion', this.question);
+            },
+            model() {
+                return this.question;
             }
         },
         methods: {
-            canAccept() {
-                this.authorize('modify', this.question);
-            },
-            edit() {
+            setEditCache() {
                 this.beforeEditCache = {
                     body: this.body,
                     title: this.title
                 };
-                this.editing = true;
             },
-            cancel() {
+            restoreFromCache() {
                 this.body = this.beforeEditCache.body;
                 this.title = this.beforeEditCache.title;
-                this.editing = false;
             },
-            update() {
-                axios.put(this.endPoint, 
-                {
+            payload() {
+                return {
                     body: this.body,
                     title: this.title
-                })
-                .then(res => {
-                    this.bodyHtml = res.data.body_html;
-                    alert(res.data.message);
-                    this.editing = false;
-                })
-                .catch(err => {
-                    console.log("There something error", err);
-                })
+                }
             },
-            destroy() {
-                if(confirm("Are you sure you want to delete?")) {
-                    axios.delete(this.endPoint)
+            delete() {
+                axios.delete(this.endPoint)
                     .then(res => {
                         alert(res.data.message);
-                    });
+                });
 
-                    setTimeout(()=> {
-                        window.location.href="/questions"
-                    }, 2000)
-
-                }
+                setTimeout(()=> {
+                    window.location.href="/questions"
+                }, 2000)
 
             }
-
         }
     }
 </script>
