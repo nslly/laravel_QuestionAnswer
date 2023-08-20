@@ -1,4 +1,4 @@
-<div class="bg-gray-700 m-16 mt-20">
+{{-- <div class="bg-gray-700 m-16 mt-20">
     <div class="mx-auto p-4 flex justify-between">
         <h2 class="font-semibold p-3 text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Your Answer
@@ -22,4 +22,4 @@
         </div>
     </form>
 
-</div>
+</div> --}}

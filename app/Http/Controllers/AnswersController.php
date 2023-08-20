@@ -49,7 +49,14 @@ class AnswersController extends Controller
         $validate['user_id'] = $request->user()->id;
 
         // dd($request->user()->id);
-        $question->answers_for_questions()->create($validate);
+        $answer = $question->answers_for_questions()->create($validate);
+
+        if(request()->expectsJson()) {
+            return response()->json([
+                'message'   => "Your answer is submitted successfully",
+                'answer'    => $answer->load('user')
+            ]);
+        }
         
 
         return redirect(route('questions.show', $question->slug))->with('success', 'Your answer is submitted successfully');
@@ -117,14 +124,18 @@ class AnswersController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
+
+        
         if (Gate::allows('delete-answer', $answer)) {
 
             if(request()->expectsJson()) {
-                response()->json([
+                return response()->json([
                     'message'   => "Your answer is deleted",
+                    'delete'    => $answer->delete(),
+                    
                 ]);
             }
-            $answer->delete();
+            
             return redirect(route('questions.show', $question->slug))->with('success', "Your answer is deleted");
         } else {
             abort(403);

@@ -70,9 +70,6 @@
 
     <answers :question="{{ $question->load('user') }}"></answers>
 
-    @include('answers.create', [
-        'buttonText' => 'Submit'
-    ])
 
     {{-- <div class="bg-gray-700 m-16 mt-20">
         <div class="mx-auto p-4 flex justify-between">

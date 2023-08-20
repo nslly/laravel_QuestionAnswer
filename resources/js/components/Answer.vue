@@ -15,36 +15,22 @@
                                 <span >Edit</span>
                             </div>
                         </a>
-
-                        <div class="text-white cursor-pointer font-bold bg-red-500  border-2 py-2 px-3 border-red-500">
-                            <button @click="destroy">X</button>
+                        <div>
+                            <button @click="destroy" class="text-white cursor-pointer font-bold bg-red-500  border-2 py-2 px-3 border-red-500">X</button>
                         </div>
 
                 </div>
                 <div class="mt-6 flex px-4">
-
-
+                    {{ pops }}
+                    <!-- Component for VOTE vue -->
                     <vote :model="answer" :name="'answer'"></vote>
-                    <!-- <div class="flex flex-col px-2 justify-evenly items-center">
-                        <a title="This helps to my question"
-                        class="cursor-pointer"
-                        onclick="event.preventDefault(); document.getElementById('answer-vote-up-{{ answer.id  }}').submit()">
-                            <i class="fa fa-3x fa-caret-up "></i>
-                        </a>
-                        <span class="text-white">
-                            {{ answer.votes_count }}
-                        </span>
-                        <a title="This not helps to my question" 
-                            class="cursor-pointer"
-                            onclick="event.preventDefault(); document.getElementById('answer-vote-down-{{ answer.id }}').submit()">
-                            <i class="fa fa-3x fa-caret-down"></i>
-                        </a>
-                        <accept  :answer="answer" :question="question"></accept>
-                    </div> -->
+
                     <div class="p-5 text-white bg-gray-700">
                         <p v-html="bodyHtml"></p>
                     </div>
                 </div>
+
+                <!-- Component for UserInfo vue -->
                 <div class="flex flex-col ml-6 py-6">
                     <user-info label='Answered' :model="answer"></user-info>
                 </div>
@@ -111,6 +97,9 @@
             
             canAccept() {
                 return this.authorize('modify', this.answer);
+            },
+            pops() {
+                console.log(this.answer);
             }
         }
     }

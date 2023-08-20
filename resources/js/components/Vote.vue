@@ -16,7 +16,10 @@
             >
                 <i class="fa fa-3x fa-caret-down"></i>
             </a>
+            <!-- Component for Favorite vue -->
             <favorite v-if="name === 'question'" :question="model"></favorite>
+
+            <!-- Component for Accept vue -->
             <accept  v-else :answer="model" :question="model.question"></accept>
             
             
@@ -38,7 +41,7 @@ import Accept from './Accept.vue';
         data() {
             return {
                 id: this.name === 'question' ? this.model.slug : this.model.id,
-                count: this.name === 'question' ? this.model.votes : this.model.votes_count,
+                count: this.name === 'question' ? this.model.votes || 0 : this.model.votes_count || 0,
             }
         },
         computed: {

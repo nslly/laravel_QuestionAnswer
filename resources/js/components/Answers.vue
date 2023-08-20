@@ -9,30 +9,31 @@
         
             <hr>
 
+            <!-- Component for Answer vue -->
             <answer @delete="remove(index)" v-for="(answer, index) in answers" :key="answer.id" :answer="answer"></answer>
 
             <hr>
 
+            <!-- Load more answer  -->
             <div class="p-4 flex justify-center" v-if="nextUrl">
                 <a @click.prevent=" fetch(nextUrl) " class="text-md  cursor-pointer border-gray-900 bg-gray-900 shadow-md rounded-lg p-2 text-gray-800 dark:text-gray-200">LOAD MORE QUESTIONS</a>
             </div>
 
         
-            <!-- @foreach ($answers as $answer)
-                @include('answers._answer', [
-                    'answer'    => $answer,
-                ])
-                <hr>
-            @endforeach -->
         </div>
+
+        <!-- Component for CreateAnswer vue -->
+        <create-answer @created="add" :question-id="question.slug"></create-answer>
+
     </div>
 </template>
 
 <script>
 import Answer from './Answer.vue';
+import CreateAnswer from './CreateAnswer.vue'
     export default {
         name: 'Answers',
-        components: { Answer },
+        components: { Answer, CreateAnswer },
         props: ['question'],
         data() {
             return {
@@ -56,6 +57,10 @@ import Answer from './Answer.vue';
             remove(index) {
                 this.answers.splice(index,1);
                 this.count--;
+            },
+            add(answer) {
+                this.answers.push(answer);
+                this.count++;
             }
         },
         computed: {
