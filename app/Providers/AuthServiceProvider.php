@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $question->user_id;
         });
         Gate::define('delete-question', function (User $user, Question $question) {
-            return $user->id === $question->user_id;
+            return $user->id === $question->user_id && $question->answers < 1;
         });
 
         Gate::define('update-answer', function (User $user, Answer $answer) {

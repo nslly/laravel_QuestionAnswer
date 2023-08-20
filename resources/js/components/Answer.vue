@@ -21,7 +21,7 @@
 
                 </div>
                 <div class="mt-6 flex px-4">
-                    {{ pops }}
+
                     <!-- Component for VOTE vue -->
                     <vote :model="answer" :name="'answer'"></vote>
 
@@ -40,10 +40,16 @@
 </template>
 
 <script>
+import Vote from './Vote.vue';
+import UserInfo from './UserInfo.vue';
     export default {
         name: 'Answer',
         props: ['answer'],
         inject: ['authorize'],
+        components: {
+            Vote,
+            UserInfo
+        },
         data() {
             return {
                 editing: false,
@@ -98,9 +104,6 @@
             canAccept() {
                 return this.authorize('modify', this.answer);
             },
-            pops() {
-                console.log(this.answer);
-            }
         }
     }
 </script>

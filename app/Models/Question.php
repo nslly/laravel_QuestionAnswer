@@ -21,7 +21,7 @@ class Question extends Model
         'body'
     ];
 
-    protected $appends = ['created_date', 'is_favorited', 'favorites_count'];
+    protected $appends = ['created_date', 'is_favorited', 'favorites_count', 'body_html'];
 
 
     public function user() {
@@ -105,16 +105,18 @@ class Question extends Model
     protected function excerpt(): Attribute
     {
         return Attribute::make(
-            get: fn () =>  Str::limit(strip_tags($this->bodyHtml()), 300)
+            get: fn () =>  Str::limit(strip_tags($this->body_html), 300)
         );
     }
 
 
-    protected function bodyHtml() 
+    protected function bodyHtml(): Attribute
     {
-        return Parsedown::instance()->text($this->body);
-    }
 
+        return Attribute::make(
+            get: fn () => Parsedown::instance()->text($this->body)
+        );
+    }
     
 
     

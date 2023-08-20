@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <div class="bg-gray-700 m-16">
+    {{-- <div class="bg-gray-700 m-16">
         <div class="mx-auto p-4 flex justify-between">
             <h2 class="font-semibold p-3 text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ $question->title }}
@@ -27,7 +27,7 @@
                 <div class="flex flex-col px-2 justify-evenly items-center">
 
 
-                    <vote  :model="{{ $question }}" :name="'question'"></vote>
+                    <vote  :model="{{ $question }}" :name="'question'"></vote> --}}
                     {{-- <a title="This helps to my question" 
                         class="cursor-pointer"
                         onclick="event.preventDefault(); document.getElementById('question-vote-up-{{ $question->slug }}').submit()">
@@ -50,7 +50,7 @@
                         <input type="hidden" name="vote" value="-1">
                     </form>
                     <favorite :question="{{ $question }}"></favorite> --}}
-                    <form id="favorite-question-{{ $question->slug }}" action="/questions/{{ $question->slug }}/favorites" method="POST" enctype="multipart/form-data" class="hidden">
+                    {{-- <form id="favorite-question-{{ $question->slug }}" action="/questions/{{ $question->slug }}/favorites" method="POST" enctype="multipart/form-data" class="hidden">
                         @csrf
                         @if ($question->is_favorited)
                             @method('delete')
@@ -65,10 +65,10 @@
                 <user-info label='Asked' :model= "{{ $question->load('user') }}"></user-info>
             </div>
         </div>
-    </div>
+    </div> --}}
+    
+    <question-page :question="{{ $question->load('user') }}"> </question-page>
 
-
-    <answers :question="{{ $question->load('user') }}"></answers>
 
 
     {{-- <div class="bg-gray-700 m-16 mt-20">

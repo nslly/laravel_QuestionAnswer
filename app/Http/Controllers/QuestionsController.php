@@ -120,6 +120,13 @@ class QuestionsController extends Controller
         $validated = $request->validated();
         $question->update($validated);
 
+        if(request()->expectsJson()) {
+            return response()->json([
+                'message'   => "Your question is now updated",
+                'body_html'    => $question->body_html
+            ]);
+        }
+
         return redirect(route('questions.index'))->with('success', 'Your question are now updated');
     }
 
@@ -132,7 +139,10 @@ class QuestionsController extends Controller
     public function destroy(Question $question)
     {
         if(request()->expectsJson()) {
-            return response()->json(null, 204);
+            return response()->json([
+                'message' => "Your question are now deleted.",
+                'delete'  => $question->delete()
+            ]);
         }
 
         if (Gate::allows('delete-question',$question)) {

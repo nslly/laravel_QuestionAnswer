@@ -1,19 +1,16 @@
 import './bootstrap';
 
 import { createApp } from 'vue';
-import Index from './components/Index.vue';
-import UserInfo from './components/UserInfo.vue';
-import Vote from './components/Vote.vue';
-import Answers from './components/Answers.vue';
+
 import policies from './authorization/policies';
+import QuestionPage from './pages/QuestionPage.vue'
 
 import mitt from 'mitt';                  // Import mitt
 const emitter = mitt();                   // Initialize mitt
 
 const app = createApp({})
-    app.component('UserInfo', UserInfo);
-    app.component('Vote', Vote);
-    app.component('Answers', Answers);
+
+    app.component('QuestionPage', QuestionPage);
 
     app.config.globalProperties.emitter = emitter; // using global property to use $this.emitter
     
