@@ -42,18 +42,17 @@
 <script>
 import Vote from './Vote.vue';
 import UserInfo from './UserInfo.vue';
-import modification from '../mixins/modification.js';
     export default {
         name: 'Answer',
         props: ['answer'],
         inject: ['authorize'],
-        mixins: [modification],
         components: {
             Vote,
             UserInfo
         },
         data() {
             return {
+                editing: false,
                 body: this.answer.body,
                 id: this.answer.id,
                 questionId: this.answer.question.slug,
@@ -62,31 +61,39 @@ import modification from '../mixins/modification.js';
             }
         },
         methods: {
-            setEditCache() {
+            edit() {
                 this.beforeEditCache = this.body;
+                this.editing = true;
             },
-            restoreFromCache() {
+            cancel() {
                 this.body = this.beforeEditCache;
+                this.editing = false;
             },
-            payload() {
-                return {
+            update() {
+                axios.patch(this.endPoint, 
+                {
                     body: this.body
-                }
+                })
+                .then(res => {
+                    this.editing = false;
+                    this.bodyHtml = res.data.body_html;
+                    alert(res.data.message);
+                })
+                .catch(err => {
+                    console.log("There something error", err);
+                })
             },
-            delete() {
-                axios.delete(this.endPoint)
+            destroy() {
+
+                if(confirm("Are you sure you want to delete?")) {
+                    axios.delete(this.endPoint)
                     .then(res => {
                         this.$emit('delete');
-                });
-            },
-            
+                    });
+                }
+            }
         },
         computed: {
-            model() {
-                return this.answer;
-            },
-            
-            
             isInvalid() {
                 return this.body.length < 10;
             },
@@ -94,6 +101,9 @@ import modification from '../mixins/modification.js';
                 return `/questions/${this.questionId}/answers/${this.id}`;
             },
             
+            canAccept() {
+                return this.authorize('modify', this.answer);
+            },
         }
     }
 </script>
